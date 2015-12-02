@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{6697fbcf-cd44-4ba9-b24e-f27029bbe99a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\math">
+      <UniqueIdentifier>{e0572ab6-bb40-495f-a35b-180a9c755534}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\method">
+      <UniqueIdentifier>{fcdbe177-9c28-4b19-912e-ef0b48d6e97e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\method\support">
+      <UniqueIdentifier>{7ba75ccf-cd83-46fb-aba3-eea085579538}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="GomoryMethod.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="Digit.cpp">
+      <Filter>src\math</Filter>
+    </ClCompile>
+    <ClCompile Include="Gomory.cpp">
+      <Filter>src\method</Filter>
+    </ClCompile>
+    <ClCompile Include="Equation.cpp">
+      <Filter>src\method\support</Filter>
+    </ClCompile>
+    <ClCompile Include="Limit.cpp">
+      <Filter>src\method\support</Filter>
+    </ClCompile>
+    <ClCompile Include="Task.cpp">
+      <Filter>src\method\support</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Digit.h">
+      <Filter>src\math</Filter>
+    </ClInclude>
+    <ClInclude Include="Gomory.h">
+      <Filter>src\method</Filter>
+    </ClInclude>
+    <ClInclude Include="Equation.h">
+      <Filter>src\method\support</Filter>
+    </ClInclude>
+    <ClInclude Include="Limit.h">
+      <Filter>src\method\support</Filter>
+    </ClInclude>
+    <ClInclude Include="Task.h">
+      <Filter>src\method\support</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
