@@ -5,7 +5,12 @@
 using std::string;
 
 namespace math {
-  
+  enum DigitType {
+    DT_Definite,
+    DT_Undefenite,
+    DT_Infinity
+  };
+
   class Digit {
   public:
     Digit(int numerator, int denominator);
@@ -15,6 +20,10 @@ namespace math {
     ~Digit();
     double toDouble();
     string toString();
+    bool integer();
+    Digit& left();
+    Digit& absD();
+    DigitType digitType();
 
     Digit& operator/(const Digit&);
     Digit& operator/(const int&);
@@ -35,12 +44,19 @@ namespace math {
     Digit& operator-=(const int&);
     Digit& operator=(const Digit&);
     Digit& operator=(const int &);
+    bool operator<=(const Digit&);
+    bool operator<=(const int&);
+    bool operator<(const Digit&);
+    bool operator<(const int&);
+    bool operator>(const Digit&);
+    bool operator>(const int&);
     bool operator==(const Digit&);
     bool operator==(const int&);
     bool operator!=(const Digit&);
     bool operator!=(const int&);
   private:
 
+    DigitType _digitType;
     int _numerator;
     int _denominator;
 

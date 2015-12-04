@@ -35,11 +35,28 @@ string Digit::_intToString(int value) {
   return ret;
 }
 
+DigitType Digit::digitType(){
+  return _digitType;
+}
+
 void Digit::_reduce() {
   if(this->_denominator < 0) {
     _numerator = -_numerator;
     _denominator = -_denominator;
   }
+
+  if (_denominator == 0){
+    if (_numerator == 0)
+      _digitType = DT_Undefenite;
+    else
+      _digitType = DT_Infinity;
+  }
+  else
+    _digitType = DT_Definite;
+
+  if (_digitType != DT_Definite)
+    return;
+
   static int simple [] = {2,3,5,7,11,13,17,19,23,29,
     31,37,41,43,47,53,59,61,67,71,
     73,79,83,89,97,101,103,107,109,113,
@@ -203,4 +220,73 @@ Digit& Digit::operator-=(const int &value) {
   _denominator = _denominator;
   _reduce();
   return *this;
+}
+
+bool Digit::operator<(const Digit& b){
+  Digit a = Digit(*this);
+  Digit b_ = Digit(b);
+  a._numerator = _numerator*b._denominator;
+  a._denominator = _denominator*b._denominator;
+  b_._numerator = b._numerator*_denominator;
+  b_._denominator = b._denominator *_denominator;
+
+  if (a._numerator < b_._numerator)
+    return true;
+  return false;
+}
+
+bool Digit::operator<=(const Digit& b){
+  Digit a = Digit(*this);
+  Digit b_ = Digit(b);
+  a._numerator = _numerator*b._denominator;
+  a._denominator = _denominator*b._denominator;
+  b_._numerator = b._numerator*_denominator;
+  b_._denominator = b._denominator *_denominator;
+
+  if (a._numerator <= b_._numerator)
+    return true;
+  return false;
+}
+
+bool Digit::operator<=(const int& value){
+  if (_numerator <= value*_denominator)
+    return true;
+  return false;
+}
+
+bool Digit::operator<(const int& value){
+  if (_numerator < value*_denominator)
+    return true;
+  return false;
+}
+
+bool Digit::operator>(const Digit& b){
+  if (*this <= b)
+    return false;
+  return true;
+}
+
+bool Digit::operator>(const int& value){
+  if (*this <= value)
+    return false;
+  return true;
+}
+
+bool Digit::integer(){
+  _reduce();
+  if (_denominator != 1)
+    return false;
+  return true;
+}
+
+Digit& Digit::left(){
+  if (_digitType != DT_Definite)
+    return *(new Digit(0, 0));
+
+  return *(new Digit(_numerator % _denominator, _denominator));
+}
+
+Digit& Digit::absD(){
+  _reduce();
+  return *(new Digit(abs(_numerator), _denominator));
 }
