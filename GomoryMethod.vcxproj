@@ -81,6 +81,7 @@
     <ClCompile Include="Gomory.cpp" />
     <ClCompile Include="GomoryMethod.cpp" />
     <ClCompile Include="Limit.cpp" />
+    <ClCompile Include="Solver.cpp" />
     <ClCompile Include="Task.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -88,6 +89,7 @@
     <ClInclude Include="Equation.h" />
     <ClInclude Include="Gomory.h" />
     <ClInclude Include="Limit.h" />
+    <ClInclude Include="Solver.h" />
     <ClInclude Include="Task.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

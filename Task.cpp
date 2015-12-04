@@ -1,6 +1,6 @@
 #include "Task.h"
 
-using namespace gomory;
+using namespace solver;
 
 Task::Task() {}
 

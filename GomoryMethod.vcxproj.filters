@@ -33,6 +33,9 @@
     <ClCompile Include="Task.cpp">
       <Filter>src\method\support</Filter>
     </ClCompile>
+    <ClCompile Include="Solver.cpp">
+      <Filter>src\method</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Digit.h">
@@ -49,6 +52,9 @@
     </ClInclude>
     <ClInclude Include="Task.h">
       <Filter>src\method\support</Filter>
+    </ClInclude>
+    <ClInclude Include="Solver.h">
+      <Filter>src\method</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

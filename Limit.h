@@ -3,7 +3,7 @@
 
 #include "Equation.h"
 
-namespace gomory {
+namespace solver {
 
   enum LimitType {
     LT_Less,

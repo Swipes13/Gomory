@@ -5,7 +5,7 @@
 #include "Equation.h"
 using std::vector;
 
-namespace gomory {
+namespace solver {
 
   enum TaskType {
     TT_Min,

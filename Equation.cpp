@@ -1,6 +1,6 @@
 #include "Equation.h"
 
-using namespace gomory;
+using namespace solver;
 
 Equation::Equation() {
 }

@@ -1,6 +1,6 @@
 #include "Limit.h"
 
-using namespace gomory;
+using namespace solver;
 
 Limit::Limit() { }
 

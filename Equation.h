@@ -7,7 +7,7 @@
 using std::vector;
 using math::Digit;
 
-namespace gomory {
+namespace solver {
 
   class Equation {
   public:
