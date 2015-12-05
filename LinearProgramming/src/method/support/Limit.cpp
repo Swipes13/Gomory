@@ -23,3 +23,7 @@ Equation& Limit::equation() {
 LimitType Limit::limitType() {
   return _limitType; 
 }
+
+void Limit::setLimitType(LimitType type) {
+  _limitType = type;
+}

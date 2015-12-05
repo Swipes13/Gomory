@@ -21,6 +21,7 @@ namespace solver {
     Digit& x(int);
     Digit& forConst();
     int countX();
+    void changeSigns();
 
   private:
     vector<Digit> _equa;

@@ -4,49 +4,16 @@ using namespace solver;
 #include <map>
 using std::map;
 
-void GomoryFirstSolverSimplex::initialize(Task& task) {
+void GomoryFirstSolverSimplex::_initialize() {
   _r = 0;
-
-  _state = solver::SS_Support;
-  _task = task;
-
-  _sizeY = _task.equation().countX() + 1;
   _sizeX = _sizeY + _task.countLimits();
-
   for(int i = 0; i < _sizeX; i++) _lblX.push_back(i);
-  _lblY.push_back(-1);
-  for(int i = 1; i < _sizeY; i++) _lblY.push_back(i);
 
-  vector<Digit> digs;
-  digs.push_back(_task.equation().forConst());
-
-  for(int i = 0; i < _task.equation().countX(); i++) 
-    digs.push_back(-_task.equation().x(i));
-  _table.push_back(digs);
-
-  for(int i = 0; i < _task.equation().countX(); i++) {
-    vector<Digit> digs_;
-    digs_.push_back(Digit(0));
-    for(int j = 0; j < _task.equation().countX(); j++) {
-      if(j == i) 
-        digs_.push_back(Digit(-1));
-      else 
-        digs_.push_back(Digit(0));
-    }
-    _table.push_back(digs_);
-  }
-
-  for(int i = 0; i < _task.countLimits(); i++) {
-    vector<Digit> digs_;
-    digs_.push_back(_task.limit(i).equation().forConst());
-    for(int j = 0; j < _task.equation().countX(); j++) 
-      digs_.push_back(-_task.limit(i).equation().x(j));
-    _table.push_back(digs_);
-  }
-
+  _addGomoryLimitsToTable();
+  _addLimitsToTable();
 }
 
-bool GomoryFirstSolverSimplex::__stepOptimalIntegerWork() {
+bool GomoryFirstSolverSimplex::_stepOptimalIntegerWork() {
   if(!_addSection()) return false;
 
   int k = -1;
@@ -66,10 +33,6 @@ bool GomoryFirstSolverSimplex::__stepOptimalIntegerWork() {
   }
   _r++;
   return true;
-}
-
-bool GomoryFirstSolverSimplex::_stepOptimalIntegerWork(){
-  return __stepOptimalIntegerWork();
 }
 
 bool GomoryFirstSolverSimplex::_addSection(){
@@ -156,27 +119,14 @@ void GomoryFirstSolverSimplex::_afterMJEWork(int r, int l) {
   }
 }
 
-/*void GomorySolver::lMethod(){
-int k = _sizeX - 1;
-
-vector<vector<Digit>> clmns;
-for (int j = 1; j < _sizeY; j++){
-vector<Digit> clm;
-for (int i = 0; i < _sizeX; i++){
-clm.push_back(_table[i][j]);
+void GomoryFirstSolverSimplex::_addGomoryLimitsToTable() {
+  for(int i = 0; i < _task.equation().countX(); i++) {
+    vector<Digit> digs;
+    digs.push_back(Digit(0));
+    for(int j = 0; j < _task.equation().countX(); j++) {
+      if(j == i) digs.push_back(Digit(-1));
+      else digs.push_back(Digit(0));
+    }
+    _table.push_back(digs);
+  }
 }
-clmns.push_back(clm);
-}
-
-int l = 0;
-auto min = clmns[l];
-for (int i = 1; i < static_cast<int>(clmns.size()); i++){
-if(_compareLexicalMinimal(clmns[i], min)) {
-min = clmns[i];
-l = i;
-}
-}
-
-_modifyJordanException(k, l + 1);
-}
-*/

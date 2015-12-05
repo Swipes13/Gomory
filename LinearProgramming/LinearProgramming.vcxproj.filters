@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\SimplexMethods.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="src\math\Digit.cpp">
       <Filter>src\math</Filter>
     </ClCompile>
@@ -41,6 +38,9 @@
     </ClCompile>
     <ClCompile Include="src\method\Solver.cpp">
       <Filter>src\method</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LinearProgramming.cpp">
+      <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

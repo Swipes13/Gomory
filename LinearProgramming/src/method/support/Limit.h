@@ -19,6 +19,7 @@ namespace solver {
     ~Limit();
     Equation& equation();
     LimitType limitType();
+    void setLimitType(LimitType);
 
   private:
     Equation _equation;

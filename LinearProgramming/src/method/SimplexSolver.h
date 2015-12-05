@@ -7,7 +7,7 @@ namespace solver{
 
   class SimplexSolver : public Solver {
   public:
-    virtual void initialize(Task&) override;
+    virtual void _initialize() override;
 
   protected:
     bool _stepSupportWork() override;

@@ -48,3 +48,9 @@ Digit& Equation::forConst() {
 int Equation::countX() {
   return static_cast<int>(_equa.size());
 }
+
+void Equation::changeSigns() {
+  for(int i = 0; i < static_cast<int>(_equa.size()); i++)
+    this->_equa[i] = -this->_equa[i];
+  this->_forConst = -this->_forConst;
+}

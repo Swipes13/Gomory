@@ -20,6 +20,7 @@ namespace solver {
     Limit& limit(int index);
     Equation& equation();
     TaskType taskType();
+    void setTaskType(TaskType);
     int countLimits();
     void setEquation(const Equation&);
 

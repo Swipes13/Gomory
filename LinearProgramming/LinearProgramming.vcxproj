@@ -81,7 +81,7 @@
     <ClCompile Include="src\method\support\Equation.cpp" />
     <ClCompile Include="src\method\GomoryFirstSolver.cpp" />
     <ClCompile Include="src\method\GomoryFirstSolverSimplex.cpp" />
-    <ClCompile Include="src\SimplexMethods.cpp" />
+    <ClCompile Include="src\LinearProgramming.cpp" />
     <ClCompile Include="src\method\support\Limit.cpp" />
     <ClCompile Include="src\method\SimplexSolver.cpp" />
     <ClCompile Include="src\method\Solver.cpp" />

@@ -19,12 +19,13 @@ namespace solver {
   class Solver {
   public:
     Solver();
-    virtual void initialize(Task&t) = 0;
+    void initialize(Task&t);
     bool stepWork();
     SolverState state();
     Digit& result();
 
   protected:
+    virtual void _initialize() = 0;
     virtual bool _stepSupportWork() = 0;
     virtual bool _stepOptimalWork() = 0;
     virtual void _afterMJEWork(int r, int l) = 0;
@@ -32,6 +33,8 @@ namespace solver {
     virtual bool _stepOptimalIntegerWork();
 
     void _modifyJordanException(int r, int l);
+    void _makeUnifiedEquations();
+    void _addLimitsToTable();
   protected:
     SolverState _state;
 

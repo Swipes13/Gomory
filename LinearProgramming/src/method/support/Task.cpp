@@ -40,3 +40,7 @@ int Task::countLimits() {
 void Task::setEquation(const Equation& equa){
   _equa = equa;
 }
+
+void Task::setTaskType(TaskType type) {
+  _taskType = type;
+}

@@ -8,7 +8,7 @@ namespace solver {
   
   class GomoryFirstSolverSimplex : public SimplexSolver {
   public:
-    virtual void initialize(Task&) override;
+    virtual void _initialize() override;
 
   protected:
     bool _stepOptimalIntegerWork() override;
@@ -18,12 +18,12 @@ namespace solver {
     vector<vector<Digit>>& _generateColumns(int k);
 
   protected:
-    bool __stepOptimalIntegerWork();
     void _cutTableException(int k);
     int _r;
 
   private:
     bool _addSection();
+    void _addGomoryLimitsToTable();
   };
 
 }
