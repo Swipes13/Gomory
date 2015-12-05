@@ -24,6 +24,7 @@ bool GomoryFirstSolverSimplex::_stepOptimalIntegerWork() {
   if (k != -1) {
     for (int i = 0; i < _sizeY; i++)
     if (_table[k][i].integer()){
+      _errorMessage = "Optimal Integer plan. In line for section are integer value!";
       _state = solver::SS_ErrorOptimalInteger;
       return false;
     }
@@ -40,6 +41,7 @@ bool GomoryFirstSolverSimplex::_addSection(){
   for (int i = 0; i < _sizeX; i++) {
     if (_table[i][0].digitType() != math::DigitType::DT_Definite) {
       _state = solver::SS_ErrorOptimalInteger;
+      _errorMessage = "Optimal Integer plan. One Digit is undefined!";
       return false;
     }
     if (!_table[i][0].integer()) {

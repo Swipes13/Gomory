@@ -7,6 +7,7 @@ using std::map;
 using std::cout;
 
 Solver::Solver(){
+  _errorMessage = "All OK";
   _state = SS_NotInit;
 }
 
@@ -59,6 +60,7 @@ bool Solver::_computeZeroStrs() {
 
       if(divisions.size() <= 0) {
         _state = SS_ErrorZeroStrs;
+        _errorMessage = "Error in computing zero strings.";
         return false;
       }
 
@@ -181,19 +183,7 @@ int Solver::labelY(int index) {
 }
 
 std::string Solver::getError() {
-  switch(_state) {
-  case solver::SS_NotInit:
-    return "NotInit!";
-  case solver::SS_ErrorZeroStrs:
-    return "Zero strings!";
-  case solver::SS_ErrorSupport:
-    return "Support!";
-  case solver::SS_ErrorOptimal:
-    return "Optimal!";
-  case solver::SS_ErrorOptimalInteger:
-    return "Optimal Integer!";
-  default: return "Undefined!";
-  }
+  return _errorMessage;
 }
 
 std::string Solver::getResult() {

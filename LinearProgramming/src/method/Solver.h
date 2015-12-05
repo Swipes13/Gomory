@@ -2,6 +2,7 @@
 #define SOLVER_H_
 
 #include "support\Task.h"
+using std::string;
 
 namespace solver {
 
@@ -30,8 +31,8 @@ namespace solver {
     int sizeY();
     int labelX(int);
     int labelY(int);
-    std::string getError();
-    std::string getResult();
+    string getError();
+    string getResult();
 
   protected:
     virtual void _initialize() = 0;
@@ -54,6 +55,8 @@ namespace solver {
     vector<int> _lblX;
     vector<int> _lblY;
     vector<bool> _zeroStr;
+
+    string _errorMessage;
 
   private:
     bool _computeZeroStrs();

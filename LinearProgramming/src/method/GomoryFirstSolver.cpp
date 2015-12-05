@@ -5,6 +5,7 @@ using namespace solver;
 bool GomoryFirstSolver::_stepSupportWork(){
   if (!_preOptimalWork()) {
     _state = SS_ErrorOptimal;
+    _errorMessage = "PreOptimal plan(lMethod) error.";
     return false;
   }
   _state = SS_Optimal;
@@ -16,6 +17,7 @@ bool GomoryFirstSolver::_stepOptimalWork(){
   for (int i = 0; i < _sizeX; i++) {
     if (_table[i][0].digitType() != math::DigitType::DT_Definite) {
       _state = solver::SS_ErrorOptimal;
+      _errorMessage = "Optimal plan. Onde Digit is undefined.";
       return false;
     }
     if (_table[i][0] < 0) { k = i; break; }
