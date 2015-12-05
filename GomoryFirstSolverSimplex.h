@@ -13,12 +13,10 @@ namespace solver {
   protected:
     bool _stepOptimalIntegerWork() override;
     void _afterMJEWork(int r, int l) override;
-
-  private:
-    void _lMethod();
     bool _compareLexicalMinimal(vector<Digit>&, vector<Digit>&);
+    void _lMethod(int k);
 
-  private:
+  protected:
     int _r;
   };
 

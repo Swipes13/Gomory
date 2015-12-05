@@ -80,7 +80,7 @@
     <ClCompile Include="Equation.cpp" />
     <ClCompile Include="GomoryFirstSolver.cpp" />
     <ClCompile Include="GomoryFirstSolverSimplex.cpp" />
-    <ClCompile Include="GomoryMethod.cpp" />
+    <ClCompile Include="SimplexMethods.cpp" />
     <ClCompile Include="Limit.cpp" />
     <ClCompile Include="SimplexSolver.cpp" />
     <ClCompile Include="Solver.cpp" />

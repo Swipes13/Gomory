@@ -21,6 +21,7 @@ namespace math {
     double toDouble();
     string toString();
     bool integer();
+    Digit& getInteger();
     Digit& left();
     Digit& absD();
     DigitType digitType();
@@ -46,6 +47,8 @@ namespace math {
     Digit& operator=(const int &);
     bool operator<=(const Digit&);
     bool operator<=(const int&);
+    bool operator>=(const Digit&);
+    bool operator>=(const int&);
     bool operator<(const Digit&);
     bool operator<(const int&);
     bool operator>(const Digit&);

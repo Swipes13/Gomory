@@ -2,9 +2,14 @@
 
 using namespace solver;
 
-Task::Task() {}
+Task::Task(){
+}
 
-Task::~Task() {}
+Task::Task(const Task& task){
+  this->_equa = task._equa;
+  this->_limits = task._limits;
+  this->_taskType = task._taskType;
+}
 
 Task::Task(TaskType type, int count, Limit** limits, Equation& equa) {
   _taskType = type;
@@ -30,4 +35,8 @@ TaskType Task::taskType() {
 
 int Task::countLimits() {
   return static_cast<int>(_limits.size());
+}
+
+void Task::setEquation(const Equation& equa){
+  _equa = equa;
 }

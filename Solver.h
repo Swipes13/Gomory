@@ -22,6 +22,7 @@ namespace solver {
     virtual void initialize(Task&t) = 0;
     bool stepWork();
     SolverState state();
+    Digit& result();
 
   protected:
     virtual bool _stepSupportWork() = 0;

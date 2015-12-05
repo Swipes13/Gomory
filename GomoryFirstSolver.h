@@ -8,8 +8,11 @@ namespace solver {
   class GomoryFirstSolver : public GomoryFirstSolverSimplex {
   public:
   protected:
-    //bool _stepSupportWork() override;
+    bool _stepSupportWork() override;
     bool _stepOptimalWork() override;
+
+  private:
+    bool _preOptimalWork();
   };
 
 }

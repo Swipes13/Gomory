@@ -235,6 +235,14 @@ bool Digit::operator<(const Digit& b){
   return false;
 }
 
+bool Digit::operator>=(const Digit& b){
+  return !(*(this) < b);
+}
+
+bool Digit::operator>=(const int& value){
+  return !(*(this) < value);
+}
+
 bool Digit::operator<=(const Digit& b){
   Digit a = Digit(*this);
   Digit b_ = Digit(b);
@@ -289,4 +297,8 @@ Digit& Digit::left(){
 Digit& Digit::absD(){
   _reduce();
   return *(new Digit(abs(_numerator), _denominator));
+}
+
+Digit& Digit::getInteger(){
+  return *(new Digit(_numerator/_denominator));
 }

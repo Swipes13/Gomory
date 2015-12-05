@@ -14,13 +14,14 @@ namespace solver {
 
   class Task {
   public:
-    Task(TaskType, int count, Limit**, Equation&);
     Task();
-    ~Task();
+    Task(TaskType, int count, Limit**, Equation&);
+    Task(const Task&);
     Limit& limit(int index);
     Equation& equation();
     TaskType taskType();
     int countLimits();
+    void setEquation(const Equation&);
 
   private:
     TaskType _taskType;

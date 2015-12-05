@@ -50,3 +50,9 @@ void Solver::_modifyJordanException(int r, int l) {
 SolverState Solver::state() {
   return _state;
 }
+
+Digit& Solver::result(){
+  if (_state != SS_Finish)
+    return *(new Digit(0));
+  return _table[0][0];
+}

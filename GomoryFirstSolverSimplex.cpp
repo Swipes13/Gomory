@@ -72,25 +72,22 @@ bool GomoryFirstSolverSimplex::_stepOptimalIntegerWork() {
   _table.push_back(row);
   _lblX.push_back(index);
 
-  _lMethod();
+  int k = -1;
+  for (int i = 0; i < _sizeX; i++){
+    if (_table[i][0] < 0){ k = i; break; }
+  }
+
+  if (k != -1) _lMethod(k);
   _r++;
   return true;
 }
 
-void GomoryFirstSolverSimplex::_lMethod(){
-  int k = -1;
-  for (int i = 0; i < _sizeX; i++){
-    if (_table[i][0] < 0){
-      k = i; break;
-    }
-  }
-
-  if (k == -1) return;
-
-
+void GomoryFirstSolverSimplex::_lMethod(int k){
   vector<vector<Digit>> clmns;
   for (int j = 1; j < _sizeY; j++){
     vector<Digit> clm;
+    if (_table[k][j] >= 0)
+      continue;
     for (int i = 0; i < _sizeX; i++){
       clm.push_back(_table[i][j] / _table[k][j].absD());
     }

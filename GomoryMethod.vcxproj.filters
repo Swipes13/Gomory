@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="GomoryMethod.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="Digit.cpp">
       <Filter>src\math</Filter>
     </ClCompile>
@@ -41,6 +38,9 @@
     </ClCompile>
     <ClCompile Include="GomoryFirstSolver.cpp">
       <Filter>src\method</Filter>
+    </ClCompile>
+    <ClCompile Include="SimplexMethods.cpp">
+      <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
