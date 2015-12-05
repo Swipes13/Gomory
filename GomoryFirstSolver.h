@@ -10,6 +10,7 @@ namespace solver {
   protected:
     bool _stepSupportWork() override;
     bool _stepOptimalWork() override;
+    vector<vector<Digit>>& _generateColumnsPreOptimal(int k);
 
   private:
     bool _preOptimalWork();

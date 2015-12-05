@@ -14,10 +14,15 @@ namespace solver {
     bool _stepOptimalIntegerWork() override;
     void _afterMJEWork(int r, int l) override;
     bool _compareLexicalMinimal(vector<Digit>&, vector<Digit>&);
-    void _lMethod(int k);
+    void _lMethod(int k, vector<vector<Digit>>&);
+    vector<vector<Digit>>& _generateColumns(int k);
 
   protected:
+    void _cutTableException();
     int _r;
+
+  private:
+    void _addSection(int k);
   };
 
 }

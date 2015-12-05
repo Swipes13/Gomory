@@ -35,42 +35,41 @@ bool GomoryFirstSolver::_preOptimalWork(){
 
   _table.push_back(line);
   _lblX.push_back(_lblX.size());
+  _sizeX++;
 
-
-  int k = _sizeX - 1;
-
-  vector<vector<Digit>> clmns;
-  for (int j = 1; j < _sizeY; j++){
-    vector<Digit> clm;
-    for (int i = 0; i < _sizeX; i++)
-      clm.push_back(_table[i][j]);
-    clmns.push_back(clm);
-  }
-
-  int l = 0;
-  auto min = clmns[l];
-  for (int i = 1; i < static_cast<int>(clmns.size()); i++){
-    if (_compareLexicalMinimal(clmns[i], min)) {
-      min = clmns[i];
-      l = i;
-    }
-  }
-
-  _modifyJordanException(k, l + 1);
-  _sizeX--;
-  _table.pop_back();
-  _lblX.pop_back();
-
-
-
+  _lMethod(_sizeX - 1, _generateColumnsPreOptimal(_sizeX - 1));
+  _cutTableException();
 
   return true;
 }
 
 bool GomoryFirstSolver::_stepOptimalWork(){
+  int k = -1;
+  for (int i = 0; i < _sizeX; i++) {
+    if (_table[i][0].digitType() != math::DigitType::DT_Definite) {
+      _state = solver::SS_ErrorOptimal;
+      return false;
+    }
+    if (_table[i][0] < 0) { k = i; break; }
+  }
 
+  if (k == -1) {
+    _state = solver::SS_OptimalInteger;
+    return true;
+  }
 
+  _lMethod(k, _generateColumnsPreOptimal(k));
 
-  _state = SS_OptimalInteger;
   return true;
+}
+
+vector<vector<Digit>>& GomoryFirstSolver::_generateColumnsPreOptimal(int k){
+  vector<vector<Digit>>* clmns = new vector<vector<Digit>>;
+  for (int j = 1; j < _sizeY; j++){
+    vector<Digit> clm;
+    for (int i = 0; i < _sizeX; i++)
+      clm.push_back(_table[i][j]);
+    clmns->push_back(clm);
+  }
+  return *clmns;
 }

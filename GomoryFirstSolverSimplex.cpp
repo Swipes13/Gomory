@@ -58,41 +58,42 @@ bool GomoryFirstSolverSimplex::_stepOptimalIntegerWork() {
     }
   }
 
-  if(k == -1) {
-    _state = solver::SS_Finish;
-    return true;
+  if(k == -1) { _state = solver::SS_Finish; return true; }
+
+  _addSection(k);
+
+  k = -1;
+  for (int i = 0; i < _sizeX; i++){
+    if (_table[i][0] < 0){ k = i; break; }
   }
 
+  if (k != -1) {
+    for (int i = 0; i < _sizeY; i++)
+    if (_table[k][i].integer()){
+      _state = solver::SS_ErrorOptimalInteger;
+      return false;
+    }
+
+    _lMethod(k, _generateColumns(k));
+    _cutTableException();
+  }
+  _r++;
+  return true;
+}
+
+void GomoryFirstSolverSimplex::_addSection(int k){
   int index = _sizeX + _r;
   vector<Digit> row;
-  for(int i = 0; i < _sizeY; i++)
+  for (int i = 0; i < _sizeY; i++)
     row.push_back(-_table[k][i].left());
 
   _sizeX++;
   _table.push_back(row);
   _lblX.push_back(index);
-
-  int k = -1;
-  for (int i = 0; i < _sizeX; i++){
-    if (_table[i][0] < 0){ k = i; break; }
-  }
-
-  if (k != -1) _lMethod(k);
-  _r++;
-  return true;
 }
 
-void GomoryFirstSolverSimplex::_lMethod(int k){
-  vector<vector<Digit>> clmns;
-  for (int j = 1; j < _sizeY; j++){
-    vector<Digit> clm;
-    if (_table[k][j] >= 0)
-      continue;
-    for (int i = 0; i < _sizeX; i++){
-      clm.push_back(_table[i][j] / _table[k][j].absD());
-    }
-    clmns.push_back(clm);
-  }
+void GomoryFirstSolverSimplex::_lMethod(int k, vector<vector<Digit>>& vecs){
+  vector<vector<Digit>> clmns = vecs;
 
   int l = 0;
   auto min = clmns[l];
@@ -104,9 +105,26 @@ void GomoryFirstSolverSimplex::_lMethod(int k){
   }
 
   _modifyJordanException(k, l + 1);
+}
+
+void GomoryFirstSolverSimplex::_cutTableException(){
   _sizeX--;
   _table.pop_back();
   _lblX.pop_back();
+}
+
+vector<vector<Digit>>& GomoryFirstSolverSimplex::_generateColumns(int k){
+  vector<vector<Digit>>* clmns = new vector<vector<Digit>>;
+  for (int j = 1; j < _sizeY; j++){
+    vector<Digit> clm;
+    if (_table[k][j] >= 0)
+      continue;
+    for (int i = 0; i < _sizeX; i++){
+      clm.push_back(_table[i][j] / _table[k][j].absD());
+    }
+    clmns->push_back(clm);
+  }
+  return *clmns;
 }
 
 bool GomoryFirstSolverSimplex::_compareLexicalMinimal(vector<Digit>& vec1, vector<Digit>& vec2) {
