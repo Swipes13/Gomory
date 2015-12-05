@@ -52,7 +52,7 @@ bool Solver::_computeZeroStrs() {
 
       map<int, Digit> divisions;
 
-      for(int j = 0; j < _sizeY - 1; j++) {
+      for(int j = 1; j < _sizeY; j++) {
         if(_table[i][j] >= 0) 
           divisions[j] = _table[i][0] / _table[i][j];
       }
