@@ -33,10 +33,15 @@
     <ClCompile Include="Solver.cpp">
       <Filter>src\method</Filter>
     </ClCompile>
-    <ClCompile Include="GomorySolver.cpp">
+    <ClCompile Include="GomoryFirstSolverSimplex.cpp">
       <Filter>src\method</Filter>
     </ClCompile>
-    <ClCompile Include="SimplexSolver.cpp" />
+    <ClCompile Include="SimplexSolver.cpp">
+      <Filter>src\method</Filter>
+    </ClCompile>
+    <ClCompile Include="GomoryFirstSolver.cpp">
+      <Filter>src\method</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Digit.h">
@@ -54,9 +59,14 @@
     <ClInclude Include="Solver.h">
       <Filter>src\method</Filter>
     </ClInclude>
-    <ClInclude Include="GomorySolver.h">
+    <ClInclude Include="GomoryFirstSolverSimplex.h">
       <Filter>src\method</Filter>
     </ClInclude>
-    <ClInclude Include="SimplexSolver.h" />
+    <ClInclude Include="SimplexSolver.h">
+      <Filter>src\method</Filter>
+    </ClInclude>
+    <ClInclude Include="GomoryFirstSolver.h">
+      <Filter>src\method</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

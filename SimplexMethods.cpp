@@ -1,8 +1,7 @@
 #include <iostream>
 #include <conio.h>
 #include "Digit.h"
-#include "GomoryFirstSolverSimplex.h"
-#include "SimplexSolver.h"
+#include "GomoryFirstSolver.h"
 
 using namespace solver;
 using math::Digit;
@@ -21,16 +20,10 @@ void main() {
   }, Equation(2, new Digit*[2] { new Digit(1), new Digit(10) }) );
 
 
-  SimplexSolver ss;
-  ss.initialize(task);
-  while (ss.stepWork()) {
+  GomoryFirstSolver gomgom;
+  gomgom.initialize(task);
+  while (gomgom.stepWork()) {
   }
-
-  GomoryFirstSolverSimplex gom = GomoryFirstSolverSimplex();
-  gom.initialize(task);
-  while (gom.stepWork()) {
-    ;// CHECK
-  } 
 
   getchar();
 
