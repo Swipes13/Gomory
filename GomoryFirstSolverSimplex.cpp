@@ -1,4 +1,4 @@
-#include "GomorySolver.h"
+#include "GomoryFirstSolverSimplex.h"
 
 using namespace solver;
 #include <map>

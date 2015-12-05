@@ -1,7 +1,7 @@
 #include <iostream>
 #include <conio.h>
 #include "Digit.h"
-#include "GomorySolver.h"
+#include "GomoryFirstSolverSimplex.h"
 #include "SimplexSolver.h"
 
 using namespace solver;
