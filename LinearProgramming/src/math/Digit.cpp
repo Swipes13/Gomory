@@ -24,7 +24,9 @@ double Digit::toDouble() {
 }
 
 string Digit::toString() {
-  return _intToString(_numerator) + "/" + _intToString(_denominator);
+  if(_denominator != 1)
+    return _intToString(_numerator) + "/" + _intToString(_denominator);
+  return _intToString(_numerator);
 }
 
 string Digit::_intToString(int value) {

@@ -7,6 +7,8 @@ namespace solver {
 
   enum SolverState {
     SS_NotInit,
+    SS_ZeroStrs,
+    SS_ErrorZeroStrs,
     SS_Support,
     SS_ErrorSupport,
     SS_Optimal,
@@ -23,6 +25,13 @@ namespace solver {
     bool stepWork();
     SolverState state();
     Digit& result();
+    Digit& table(int, int);
+    int sizeX();
+    int sizeY();
+    int labelX(int);
+    int labelY(int);
+    std::string getError();
+    std::string getResult();
 
   protected:
     virtual void _initialize() = 0;
@@ -44,6 +53,11 @@ namespace solver {
     int _sizeY;
     vector<int> _lblX;
     vector<int> _lblY;
+    vector<bool> _zeroStr;
+
+  private:
+    bool _computeZeroStrs();
+    void _cutTable(int l);
   };
 
 }
