@@ -2,18 +2,15 @@
 #define GOMORY_H_
 
 #include "Task.h"
-#include "Solver.h"
+#include "SimplexSolver.h"
 
 namespace solver {
   
-  class GomorySolver : public Solver {
+  class GomoryFirstSolverSimplex : public SimplexSolver {
   public:
-    GomorySolver(Task& t);
-    //void lMethod();
+    virtual void initialize(Task&) override;
 
   protected:
-    bool _stepSupportWork() override;
-    bool _stepOptimalWork() override;
     bool _stepOptimalIntegerWork() override;
     void _afterMJEWork(int r, int l) override;
 

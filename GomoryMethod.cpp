@@ -2,6 +2,7 @@
 #include <conio.h>
 #include "Digit.h"
 #include "GomorySolver.h"
+#include "SimplexSolver.h"
 
 using namespace solver;
 using math::Digit;
@@ -19,10 +20,17 @@ void main() {
       //new Limit(LimitType::LT_More, eq3)
   }, Equation(2, new Digit*[2] { new Digit(1), new Digit(10) }) );
 
-  GomorySolver gom = GomorySolver(task);
-  do {
+
+  SimplexSolver ss;
+  ss.initialize(task);
+  while (ss.stepWork()) {
+  }
+
+  GomoryFirstSolverSimplex gom = GomoryFirstSolverSimplex();
+  gom.initialize(task);
+  while (gom.stepWork()) {
     ;// CHECK
-  } while (gom.stepWork());
+  } 
 
   getchar();
 

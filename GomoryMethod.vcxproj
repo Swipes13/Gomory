@@ -81,6 +81,7 @@
     <ClCompile Include="GomorySolver.cpp" />
     <ClCompile Include="GomoryMethod.cpp" />
     <ClCompile Include="Limit.cpp" />
+    <ClCompile Include="SimplexSolver.cpp" />
     <ClCompile Include="Solver.cpp" />
     <ClCompile Include="Task.cpp" />
   </ItemGroup>
@@ -89,6 +90,7 @@
     <ClInclude Include="Equation.h" />
     <ClInclude Include="GomorySolver.h" />
     <ClInclude Include="Limit.h" />
+    <ClInclude Include="SimplexSolver.h" />
     <ClInclude Include="Solver.h" />
     <ClInclude Include="Task.h" />
   </ItemGroup>

@@ -36,6 +36,7 @@
     <ClCompile Include="GomorySolver.cpp">
       <Filter>src\method</Filter>
     </ClCompile>
+    <ClCompile Include="SimplexSolver.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Digit.h">
@@ -56,5 +57,6 @@
     <ClInclude Include="GomorySolver.h">
       <Filter>src\method</Filter>
     </ClInclude>
+    <ClInclude Include="SimplexSolver.h" />
   </ItemGroup>
 </Project>

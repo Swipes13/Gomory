@@ -4,8 +4,9 @@
 #include "Task.h"
 
 namespace solver {
+
   enum SolverState {
-    SS_Start,
+    SS_NotInit,
     SS_Support,
     SS_ErrorSupport,
     SS_Optimal,
@@ -14,8 +15,11 @@ namespace solver {
     SS_ErrorOptimalInteger,
     SS_Finish
   };
+
   class Solver {
   public:
+    Solver();
+    virtual void initialize(Task&t) = 0;
     bool stepWork();
     SolverState state();
 

@@ -2,11 +2,12 @@
 
 using namespace solver;
 
+Solver::Solver(){
+  _state = SS_NotInit;
+}
+
 bool Solver::stepWork() {
   switch(_state) {
-  case solver::SS_Start:
-    _state = SS_Support;
-    return _stepSupportWork();
   case solver::SS_Support:
     return _stepSupportWork();
   case solver::SS_Optimal:

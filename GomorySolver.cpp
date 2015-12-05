@@ -4,10 +4,11 @@ using namespace solver;
 #include <map>
 using std::map;
 
-GomorySolver::GomorySolver(Task& t) {
-  _state = solver::SS_Start;
+void GomoryFirstSolverSimplex::initialize(Task& task) {
   _r = 0;
-  _task = t;
+
+  _state = solver::SS_Support;
+  _task = task;
 
   _sizeY = _task.equation().countX() + 1;
   _sizeX = _sizeY + _task.countLimits();
@@ -45,48 +46,7 @@ GomorySolver::GomorySolver(Task& t) {
 
 }
 
-bool GomorySolver::_stepSupportWork() {
-  //TODO : DO!
-  _state = solver::SS_Optimal;
-  return true;
-}
-
-bool GomorySolver::_stepOptimalWork() {
-  vector<int> ll;
-  for(int i = 0; i < _sizeY; i++) {
-    if(_table[0][i] < 0)
-      ll.push_back(i);
-  }
-
-  if(ll.size() == 0) {
-    _state = solver::SS_OptimalInteger;
-    return true;
-  }
-
-  for(auto l : ll) {
-    map<int, Digit> toChoose;
-    for(int i = 0; i < _sizeX; i++) {
-      if(_table[i][l] > 0)
-        toChoose[i] = _table[i][0] / _table[i][l];
-    }
-    if(toChoose.size() == 0) continue;
-
-    std::pair<int, Digit> min = *toChoose.begin();
-    for(auto& elem : toChoose) {
-      if(elem.second < min.second)
-        min = elem;
-    }
-    int r = min.first;
-
-    _modifyJordanException(r, l);
-    return true;
-  }
-
-  _state = solver::SS_ErrorOptimal;
-  return false;
-}
-
-bool GomorySolver::_stepOptimalIntegerWork() {
+bool GomoryFirstSolverSimplex::_stepOptimalIntegerWork() {
   int k = -1;
   for(int i = 0; i < _sizeX; i++) {
     if(_table[i][0].digitType() != math::DigitType::DT_Definite) {
@@ -117,7 +77,7 @@ bool GomorySolver::_stepOptimalIntegerWork() {
   return true;
 }
 
-void GomorySolver::_lMethod(){
+void GomoryFirstSolverSimplex::_lMethod(){
   int k = -1;
   for (int i = 0; i < _sizeX; i++){
     if (_table[i][0] < 0){
@@ -152,7 +112,7 @@ void GomorySolver::_lMethod(){
   _lblX.pop_back();
 }
 
-bool GomorySolver::_compareLexicalMinimal(vector<Digit>& vec1, vector<Digit>& vec2) {
+bool GomoryFirstSolverSimplex::_compareLexicalMinimal(vector<Digit>& vec1, vector<Digit>& vec2) {
   for (int i = 0; i < static_cast<int>(vec1.size()); i++){
     if (vec1[i] == vec2[i])
       continue;
@@ -163,7 +123,7 @@ bool GomorySolver::_compareLexicalMinimal(vector<Digit>& vec1, vector<Digit>& ve
   return false;
 }
 
-void GomorySolver::_afterMJEWork(int r, int l) {
+void GomoryFirstSolverSimplex::_afterMJEWork(int r, int l) {
   _lblY[l] = _lblX[r];
 
   if(static_cast<int>(_table.size()) >= _lblY[l])
