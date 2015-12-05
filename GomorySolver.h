@@ -6,10 +6,10 @@
 
 namespace solver {
   
-  class Gomory : public Solver {
+  class GomorySolver : public Solver {
   public:
-    Gomory(Task& t);
-    void lMethod();
+    GomorySolver(Task& t);
+    //void lMethod();
 
   protected:
     bool _stepSupportWork() override;

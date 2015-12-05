@@ -78,7 +78,7 @@
   <ItemGroup>
     <ClCompile Include="Digit.cpp" />
     <ClCompile Include="Equation.cpp" />
-    <ClCompile Include="Gomory.cpp" />
+    <ClCompile Include="GomorySolver.cpp" />
     <ClCompile Include="GomoryMethod.cpp" />
     <ClCompile Include="Limit.cpp" />
     <ClCompile Include="Solver.cpp" />
@@ -87,7 +87,7 @@
   <ItemGroup>
     <ClInclude Include="Digit.h" />
     <ClInclude Include="Equation.h" />
-    <ClInclude Include="Gomory.h" />
+    <ClInclude Include="GomorySolver.h" />
     <ClInclude Include="Limit.h" />
     <ClInclude Include="Solver.h" />
     <ClInclude Include="Task.h" />

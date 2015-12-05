@@ -1,10 +1,7 @@
 #include <iostream>
 #include <conio.h>
 #include "Digit.h"
-#include "Equation.h"
-#include "Limit.h"
-#include "Task.h"
-#include "Gomory.h"
+#include "GomorySolver.h"
 
 using namespace solver;
 using math::Digit;
@@ -20,18 +17,12 @@ void main() {
     new Limit(LimitType::LT_More, eq1), 
       new Limit(LimitType::LT_More, eq2)
       //new Limit(LimitType::LT_More, eq3)
-  },
-    Equation(2, new Digit*[2] { new Digit(1), new Digit(10) }) );
+  }, Equation(2, new Digit*[2] { new Digit(1), new Digit(10) }) );
 
-  Gomory gom = Gomory(task);
-
-  while(gom.stepWork()) {
+  GomorySolver gom = GomorySolver(task);
+  do {
     ;// CHECK
-  }
-  //gom.generateOptimaPlan();
-  //gom.lMethod();
-  //if(!gom.generateIntegerOptimaPlan())
-  //  getchar();
+  } while (gom.stepWork());
 
   getchar();
 

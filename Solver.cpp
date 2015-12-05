@@ -20,7 +20,7 @@ bool Solver::stepWork() {
 }
 
 bool Solver::_stepOptimalIntegerWork() {
-  _state = SS_ErrorOptimalInteger;
+  _state = SS_Finish;
   return false;
 }
 

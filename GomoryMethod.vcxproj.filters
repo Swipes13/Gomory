@@ -21,9 +21,6 @@
     <ClCompile Include="Digit.cpp">
       <Filter>src\math</Filter>
     </ClCompile>
-    <ClCompile Include="Gomory.cpp">
-      <Filter>src\method</Filter>
-    </ClCompile>
     <ClCompile Include="Equation.cpp">
       <Filter>src\method\support</Filter>
     </ClCompile>
@@ -36,13 +33,13 @@
     <ClCompile Include="Solver.cpp">
       <Filter>src\method</Filter>
     </ClCompile>
+    <ClCompile Include="GomorySolver.cpp">
+      <Filter>src\method</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Digit.h">
       <Filter>src\math</Filter>
-    </ClInclude>
-    <ClInclude Include="Gomory.h">
-      <Filter>src\method</Filter>
     </ClInclude>
     <ClInclude Include="Equation.h">
       <Filter>src\method\support</Filter>
@@ -54,6 +51,9 @@
       <Filter>src\method\support</Filter>
     </ClInclude>
     <ClInclude Include="Solver.h">
+      <Filter>src\method</Filter>
+    </ClInclude>
+    <ClInclude Include="GomorySolver.h">
       <Filter>src\method</Filter>
     </ClInclude>
   </ItemGroup>

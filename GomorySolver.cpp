@@ -1,10 +1,10 @@
-#include "Gomory.h"
+#include "GomorySolver.h"
 
 using namespace solver;
 #include <map>
 using std::map;
 
-Gomory::Gomory(Task& t) {
+GomorySolver::GomorySolver(Task& t) {
   _state = solver::SS_Start;
   _r = 0;
   _task = t;
@@ -45,13 +45,13 @@ Gomory::Gomory(Task& t) {
 
 }
 
-bool Gomory::_stepSupportWork() {
+bool GomorySolver::_stepSupportWork() {
   //TODO : DO!
   _state = solver::SS_Optimal;
   return true;
 }
 
-bool Gomory::_stepOptimalWork() {
+bool GomorySolver::_stepOptimalWork() {
   vector<int> ll;
   for(int i = 0; i < _sizeY; i++) {
     if(_table[0][i] < 0)
@@ -86,7 +86,7 @@ bool Gomory::_stepOptimalWork() {
   return false;
 }
 
-bool Gomory::_stepOptimalIntegerWork() {
+bool GomorySolver::_stepOptimalIntegerWork() {
   int k = -1;
   for(int i = 0; i < _sizeX; i++) {
     if(_table[i][0].digitType() != math::DigitType::DT_Definite) {
@@ -117,31 +117,7 @@ bool Gomory::_stepOptimalIntegerWork() {
   return true;
 }
 
-void Gomory::lMethod(){
-  int k = _sizeX - 1;
-
-  vector<vector<Digit>> clmns;
-  for (int j = 1; j < _sizeY; j++){
-    vector<Digit> clm;
-    for (int i = 0; i < _sizeX; i++){
-      clm.push_back(_table[i][j]);
-    }
-    clmns.push_back(clm);
-  }
-
-  int l = 0;
-  auto min = clmns[l];
-  for (int i = 1; i < static_cast<int>(clmns.size()); i++){
-    if(_compareLexicalMinimal(clmns[i], min)) {
-      min = clmns[i];
-      l = i;
-    }
-  }
-
-  _modifyJordanException(k, l + 1);
-}
-
-void Gomory::_lMethod(){
+void GomorySolver::_lMethod(){
   int k = -1;
   for (int i = 0; i < _sizeX; i++){
     if (_table[i][0] < 0){
@@ -176,7 +152,7 @@ void Gomory::_lMethod(){
   _lblX.pop_back();
 }
 
-bool Gomory::_compareLexicalMinimal(vector<Digit>& vec1, vector<Digit>& vec2) {
+bool GomorySolver::_compareLexicalMinimal(vector<Digit>& vec1, vector<Digit>& vec2) {
   for (int i = 0; i < static_cast<int>(vec1.size()); i++){
     if (vec1[i] == vec2[i])
       continue;
@@ -187,10 +163,10 @@ bool Gomory::_compareLexicalMinimal(vector<Digit>& vec1, vector<Digit>& vec2) {
   return false;
 }
 
-void Gomory::_afterMJEWork(int r, int l) {
+void GomorySolver::_afterMJEWork(int r, int l) {
   _lblY[l] = _lblX[r];
 
-  if(_table.size() >= _lblY[l])
+  if(static_cast<int>(_table.size()) >= _lblY[l])
     return;
 
   for(int i = 0; i < _sizeY; i++) {
@@ -198,3 +174,28 @@ void Gomory::_afterMJEWork(int r, int l) {
     else _table[_lblY[l]][i] = Digit(-1);
   }
 }
+
+/*void GomorySolver::lMethod(){
+int k = _sizeX - 1;
+
+vector<vector<Digit>> clmns;
+for (int j = 1; j < _sizeY; j++){
+vector<Digit> clm;
+for (int i = 0; i < _sizeX; i++){
+clm.push_back(_table[i][j]);
+}
+clmns.push_back(clm);
+}
+
+int l = 0;
+auto min = clmns[l];
+for (int i = 1; i < static_cast<int>(clmns.size()); i++){
+if(_compareLexicalMinimal(clmns[i], min)) {
+min = clmns[i];
+l = i;
+}
+}
+
+_modifyJordanException(k, l + 1);
+}
+*/
