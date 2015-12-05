@@ -46,23 +46,10 @@ void GomoryFirstSolverSimplex::initialize(Task& task) {
 
 }
 
-bool GomoryFirstSolverSimplex::_stepOptimalIntegerWork() {
+bool GomoryFirstSolverSimplex::__stepOptimalIntegerWork() {
+  if(!_addSection()) return false;
+
   int k = -1;
-  for(int i = 0; i < _sizeX; i++) {
-    if(_table[i][0].digitType() != math::DigitType::DT_Definite) {
-      _state = solver::SS_ErrorOptimalInteger;
-      return false;
-    }
-    if(!_table[i][0].integer()) {
-      k = i; break;
-    }
-  }
-
-  if(k == -1) { _state = solver::SS_Finish; return true; }
-
-  _addSection(k);
-
-  k = -1;
   for (int i = 0; i < _sizeX; i++){
     if (_table[i][0] < 0){ k = i; break; }
   }
@@ -75,13 +62,30 @@ bool GomoryFirstSolverSimplex::_stepOptimalIntegerWork() {
     }
 
     _lMethod(k, _generateColumns(k));
-    _cutTableException();
+    _cutTableException(k);
   }
   _r++;
   return true;
 }
 
-void GomoryFirstSolverSimplex::_addSection(int k){
+bool GomoryFirstSolverSimplex::_stepOptimalIntegerWork(){
+  return __stepOptimalIntegerWork();
+}
+
+bool GomoryFirstSolverSimplex::_addSection(){
+  int k = -1;
+  for (int i = 0; i < _sizeX; i++) {
+    if (_table[i][0].digitType() != math::DigitType::DT_Definite) {
+      _state = solver::SS_ErrorOptimalInteger;
+      return false;
+    }
+    if (!_table[i][0].integer()) {
+      k = i; break;
+    }
+  }
+
+  if (k == -1) { _state = solver::SS_Finish; return false; }
+
   int index = _sizeX + _r;
   vector<Digit> row;
   for (int i = 0; i < _sizeY; i++)
@@ -90,6 +94,8 @@ void GomoryFirstSolverSimplex::_addSection(int k){
   _sizeX++;
   _table.push_back(row);
   _lblX.push_back(index);
+
+  return true;
 }
 
 void GomoryFirstSolverSimplex::_lMethod(int k, vector<vector<Digit>>& vecs){
@@ -107,10 +113,10 @@ void GomoryFirstSolverSimplex::_lMethod(int k, vector<vector<Digit>>& vecs){
   _modifyJordanException(k, l + 1);
 }
 
-void GomoryFirstSolverSimplex::_cutTableException(){
+void GomoryFirstSolverSimplex::_cutTableException(int k){
+  _table.erase(_table.begin() + k);
+  _lblX.erase(_lblX.begin() + k);
   _sizeX--;
-  _table.pop_back();
-  _lblX.pop_back();
 }
 
 vector<vector<Digit>>& GomoryFirstSolverSimplex::_generateColumns(int k){
@@ -141,7 +147,7 @@ bool GomoryFirstSolverSimplex::_compareLexicalMinimal(vector<Digit>& vec1, vecto
 void GomoryFirstSolverSimplex::_afterMJEWork(int r, int l) {
   _lblY[l] = _lblX[r];
 
-  if(static_cast<int>(_table.size()) >= _lblY[l])
+  if(static_cast<int>(_table.size()) <= _lblY[l])
     return;
 
   for(int i = 0; i < _sizeY; i++) {

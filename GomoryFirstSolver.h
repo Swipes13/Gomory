@@ -14,6 +14,7 @@ namespace solver {
 
   private:
     bool _preOptimalWork();
+    bool _usePreOptimal;
   };
 
 }

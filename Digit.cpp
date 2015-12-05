@@ -291,7 +291,10 @@ Digit& Digit::left(){
   if (_digitType != DT_Definite)
     return *(new Digit(0, 0));
 
-  return *(new Digit(_numerator % _denominator, _denominator));
+  if (_numerator>=0)
+    return *(new Digit(_numerator % _denominator, _denominator));
+  else 
+    return *(new Digit(Digit(1) - Digit(_numerator % _denominator, _denominator)));
 }
 
 Digit& Digit::absD(){

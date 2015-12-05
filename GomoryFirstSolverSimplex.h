@@ -18,11 +18,12 @@ namespace solver {
     vector<vector<Digit>>& _generateColumns(int k);
 
   protected:
-    void _cutTableException();
+    bool __stepOptimalIntegerWork();
+    void _cutTableException(int k);
     int _r;
 
   private:
-    void _addSection(int k);
+    bool _addSection();
   };
 
 }

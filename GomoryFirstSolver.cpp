@@ -11,6 +11,27 @@ bool GomoryFirstSolver::_stepSupportWork(){
   return true;
 }
 
+bool GomoryFirstSolver::_stepOptimalWork(){
+  int k = -1;
+  for (int i = 0; i < _sizeX; i++) {
+    if (_table[i][0].digitType() != math::DigitType::DT_Definite) {
+      _state = solver::SS_ErrorOptimal;
+      return false;
+    }
+    if (_table[i][0] < 0) { k = i; break; }
+  }
+
+  if (k == -1) {
+    _state = solver::SS_OptimalInteger;
+    return true;
+  }
+
+  _lMethod(k, _generateColumnsPreOptimal(k));
+//  _cutTableException(k);
+
+  return true;
+}
+
 bool GomoryFirstSolver::_preOptimalWork(){
   SimplexSolver tempSolver;
   Task newTask = Task(_task);
@@ -36,29 +57,9 @@ bool GomoryFirstSolver::_preOptimalWork(){
   _table.push_back(line);
   _lblX.push_back(_lblX.size());
   _sizeX++;
-
-  _lMethod(_sizeX - 1, _generateColumnsPreOptimal(_sizeX - 1));
-  _cutTableException();
-
-  return true;
-}
-
-bool GomoryFirstSolver::_stepOptimalWork(){
-  int k = -1;
-  for (int i = 0; i < _sizeX; i++) {
-    if (_table[i][0].digitType() != math::DigitType::DT_Definite) {
-      _state = solver::SS_ErrorOptimal;
-      return false;
-    }
-    if (_table[i][0] < 0) { k = i; break; }
-  }
-
-  if (k == -1) {
-    _state = solver::SS_OptimalInteger;
-    return true;
-  }
-
+  int k = _sizeX - 1;
   _lMethod(k, _generateColumnsPreOptimal(k));
+  _cutTableException(k);
 
   return true;
 }
@@ -73,3 +74,15 @@ vector<vector<Digit>>& GomoryFirstSolver::_generateColumnsPreOptimal(int k){
   }
   return *clmns;
 }
+
+/*bool GomoryFirstSolver::_stepOptimalIntegerWork(){
+  if (_usePreOptimal){
+    if (!_preOptimalWork()) {
+      _state = SS_ErrorOptimalInteger;
+      return false;
+    }
+    _usePreOptimal = false;
+  }
+
+  return __stepOptimalIntegerWork();
+}*/
