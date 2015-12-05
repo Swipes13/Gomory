@@ -15,57 +15,57 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Digit.cpp">
+    <ClCompile Include="src\SimplexMethods.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\math\Digit.cpp">
       <Filter>src\math</Filter>
     </ClCompile>
-    <ClCompile Include="Equation.cpp">
+    <ClCompile Include="src\method\support\Task.cpp">
       <Filter>src\method\support</Filter>
     </ClCompile>
-    <ClCompile Include="Limit.cpp">
+    <ClCompile Include="src\method\support\Limit.cpp">
       <Filter>src\method\support</Filter>
     </ClCompile>
-    <ClCompile Include="Task.cpp">
+    <ClCompile Include="src\method\support\Equation.cpp">
       <Filter>src\method\support</Filter>
     </ClCompile>
-    <ClCompile Include="Solver.cpp">
+    <ClCompile Include="src\method\GomoryFirstSolver.cpp">
       <Filter>src\method</Filter>
     </ClCompile>
-    <ClCompile Include="GomoryFirstSolverSimplex.cpp">
+    <ClCompile Include="src\method\GomoryFirstSolverSimplex.cpp">
       <Filter>src\method</Filter>
     </ClCompile>
-    <ClCompile Include="SimplexSolver.cpp">
+    <ClCompile Include="src\method\SimplexSolver.cpp">
       <Filter>src\method</Filter>
     </ClCompile>
-    <ClCompile Include="GomoryFirstSolver.cpp">
+    <ClCompile Include="src\method\Solver.cpp">
       <Filter>src\method</Filter>
-    </ClCompile>
-    <ClCompile Include="SimplexMethods.cpp">
-      <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Digit.h">
+    <ClInclude Include="src\math\Digit.h">
       <Filter>src\math</Filter>
     </ClInclude>
-    <ClInclude Include="Equation.h">
+    <ClInclude Include="src\method\support\Task.h">
       <Filter>src\method\support</Filter>
     </ClInclude>
-    <ClInclude Include="Limit.h">
+    <ClInclude Include="src\method\support\Limit.h">
       <Filter>src\method\support</Filter>
     </ClInclude>
-    <ClInclude Include="Task.h">
+    <ClInclude Include="src\method\support\Equation.h">
       <Filter>src\method\support</Filter>
     </ClInclude>
-    <ClInclude Include="Solver.h">
+    <ClInclude Include="src\method\GomoryFirstSolver.h">
       <Filter>src\method</Filter>
     </ClInclude>
-    <ClInclude Include="GomoryFirstSolverSimplex.h">
+    <ClInclude Include="src\method\GomoryFirstSolverSimplex.h">
       <Filter>src\method</Filter>
     </ClInclude>
-    <ClInclude Include="SimplexSolver.h">
+    <ClInclude Include="src\method\SimplexSolver.h">
       <Filter>src\method</Filter>
     </ClInclude>
-    <ClInclude Include="GomoryFirstSolver.h">
+    <ClInclude Include="src\method\Solver.h">
       <Filter>src\method</Filter>
     </ClInclude>
   </ItemGroup>

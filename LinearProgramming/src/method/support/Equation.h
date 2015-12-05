@@ -1,7 +1,7 @@
 #ifndef EQUATION_H_
 #define EQUATION_H_
 
-#include "Digit.h"
+#include "../../math/Digit.h"
 #include <vector>
 
 using std::vector;

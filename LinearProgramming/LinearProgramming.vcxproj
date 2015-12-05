@@ -14,6 +14,7 @@
     <ProjectGuid>{78E63B39-4860-4DA1-9B33-12C6A7EB93EB}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>GomoryMethod</RootNamespace>
+    <ProjectName>LinearProgramming</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -76,25 +77,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Digit.cpp" />
-    <ClCompile Include="Equation.cpp" />
-    <ClCompile Include="GomoryFirstSolver.cpp" />
-    <ClCompile Include="GomoryFirstSolverSimplex.cpp" />
-    <ClCompile Include="SimplexMethods.cpp" />
-    <ClCompile Include="Limit.cpp" />
-    <ClCompile Include="SimplexSolver.cpp" />
-    <ClCompile Include="Solver.cpp" />
-    <ClCompile Include="Task.cpp" />
+    <ClCompile Include="src\math\Digit.cpp" />
+    <ClCompile Include="src\method\support\Equation.cpp" />
+    <ClCompile Include="src\method\GomoryFirstSolver.cpp" />
+    <ClCompile Include="src\method\GomoryFirstSolverSimplex.cpp" />
+    <ClCompile Include="src\SimplexMethods.cpp" />
+    <ClCompile Include="src\method\support\Limit.cpp" />
+    <ClCompile Include="src\method\SimplexSolver.cpp" />
+    <ClCompile Include="src\method\Solver.cpp" />
+    <ClCompile Include="src\method\support\Task.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Digit.h" />
-    <ClInclude Include="Equation.h" />
-    <ClInclude Include="GomoryFirstSolver.h" />
-    <ClInclude Include="GomoryFirstSolverSimplex.h" />
-    <ClInclude Include="Limit.h" />
-    <ClInclude Include="SimplexSolver.h" />
-    <ClInclude Include="Solver.h" />
-    <ClInclude Include="Task.h" />
+    <ClInclude Include="src\math\Digit.h" />
+    <ClInclude Include="src\method\support\Equation.h" />
+    <ClInclude Include="src\method\GomoryFirstSolver.h" />
+    <ClInclude Include="src\method\GomoryFirstSolverSimplex.h" />
+    <ClInclude Include="src\method\support\Limit.h" />
+    <ClInclude Include="src\method\SimplexSolver.h" />
+    <ClInclude Include="src\method\Solver.h" />
+    <ClInclude Include="src\method\support\Task.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

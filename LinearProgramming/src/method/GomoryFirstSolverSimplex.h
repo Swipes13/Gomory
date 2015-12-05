@@ -1,7 +1,7 @@
 #ifndef GOMORY_FIRST_SOLVER_SIMPLEX_H_
 #define GOMORY_FIRST_SOLVER_SIMPLEX_H_
 
-#include "Task.h"
+#include "support\Task.h"
 #include "SimplexSolver.h"
 
 namespace solver {
