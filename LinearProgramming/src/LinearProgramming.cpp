@@ -79,18 +79,53 @@ void release(Solver* solver) {
   delete solver;
 }
 
-Solver* getSimplex() {
+Solver* simplex() {
   return new SimplexSolver();
 }
 
-Solver* getGomoryFirstSimplex() {
+Solver* gomoryFirstSimplex() {
   return new GomoryFirstSolverSimplex();
 }
 
-Task* getTask(int type, int countLimits, Limit** limits, Equation* equation) {
+Task* task(int type, int countLimits, Limit** limits, Equation* equation) {
   TaskType tt = TaskType::TT_Max;
   if(type == 1) tt = TaskType::TT_Min;
 
   return new Task(tt, countLimits, limits, equation);
 }
+
+Digit* digit(int num, int denum) {
+  return new Digit(num, denum);
+}
+
+Limit* limit(int type, Equation *equa) {
+  LimitType lt;
+  switch(type) {
+  case 0: lt = LimitType::LT_Equal; break;
+  case 1: lt = LimitType::LT_Less; break;
+  case 2: lt = LimitType::LT_More; break;
+  default:
+    break;
+  }
+  Limit* lim = new Limit(lt, equa);
+}
+
+Equation* equation(int xCount, Digit **digs, Digit *dig) {
+  return new Equation(xCount, digs, dig);
+}
+
+void initialize(Solver* solver, Task* task) {
+  solver->initialize(task);
+}
+
+int state(Solver *solver) {
+  return solver->state();
+}
+
+Digit* result(Solver *solver) {
+  return solver->result();
+}
+
 #pragma warning(pop)
+
+// end
