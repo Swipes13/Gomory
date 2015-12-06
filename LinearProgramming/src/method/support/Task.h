@@ -15,19 +15,20 @@ namespace solver {
   class Task {
   public:
     Task();
-    Task(TaskType, int count, Limit**, Equation&);
+    ~Task();
+    Task(TaskType, int count, Limit**, Equation*);
     Task(const Task&);
-    Limit& limit(int index);
-    Equation& equation();
+    Limit* limit(int index);
+    Equation* equation();
     TaskType taskType();
     void setTaskType(TaskType);
     int countLimits();
-    void setEquation(const Equation&);
+    void setEquation(Equation*);
 
   private:
     TaskType _taskType;
-    Equation _equa;
-    vector<Limit> _limits;
+    Equation* _equa;
+    vector<Limit*> _limits;
   };
 
 }

@@ -11,19 +11,23 @@ Solver::Solver(){
   _state = SS_NotInit;
 }
 
-void Solver::initialize(Task& task) {
+Solver::~Solver() {
+  delete _task;
+}
+
+void Solver::initialize(Task* task) {
   _state = solver::SS_ZeroStrs;
   _task = task;
   _makeUnifiedEquations();
 
-  _sizeY = _task.equation().countX() + 1;
+  _sizeY = _task->equation()->countX() + 1;
   _lblY.push_back(-1);
   for(int i = 1; i < _sizeY; i++) _lblY.push_back(i);
 
   vector<Digit> digs;
-  digs.push_back(_task.equation().forConst());
-  for(int i = 0; i < _task.equation().countX(); i++)
-    digs.push_back(-_task.equation().x(i));
+  digs.push_back((*_task->equation()->forConst()));
+  for(int i = 0; i < _task->equation()->countX(); i++)
+    digs.push_back(-(*_task->equation()->x(i)));
   _table.push_back(digs);
   _zeroStr.push_back(false);
 
@@ -123,22 +127,22 @@ SolverState Solver::state() {
   return _state;
 }
 
-Digit& Solver::result(){
+Digit* Solver::result(){
   if (_state != SS_Finish)
-    return *(new Digit(0));
-  return _table[0][0];
+    return new Digit();
+  return &_table[0][0];
 }
 
 void Solver::_makeUnifiedEquations() {
-  if(this->_task.taskType() == TaskType::TT_Min) {
-    this->_task.equation().changeSigns();
-    this->_task.setTaskType(TaskType::TT_Max);
+  if(this->_task->taskType() == TaskType::TT_Min) {
+    this->_task->equation()->changeSigns();
+    this->_task->setTaskType(TaskType::TT_Max);
   }
-  for(int i = 0; i < this->_task.countLimits(); i++) {
-    switch(this->_task.limit(i).limitType()) {
+  for(int i = 0; i < this->_task->countLimits(); i++) {
+    switch(this->_task->limit(i)->limitType()) {
     case LimitType::LT_Less:
-      this->_task.limit(i).equation().changeSigns();
-      this->_task.limit(i).setLimitType(LimitType::LT_More);
+      this->_task->limit(i)->equation()->changeSigns();
+      this->_task->limit(i)->setLimitType(LimitType::LT_More);
       break;
     case LimitType::LT_Equal:
       // TODO: null-strs!
@@ -149,21 +153,21 @@ void Solver::_makeUnifiedEquations() {
 }
 
 void Solver::_addLimitsToTable() {
-  for(int i = 0; i < _task.countLimits(); i++) {
+  for(int i = 0; i < _task->countLimits(); i++) {
     vector<Digit> digs_;
-    digs_.push_back(_task.limit(i).equation().forConst());
+    digs_.push_back(*_task->limit(i)->equation()->forConst());
 
-    _task.limit(i).limitType() == LimitType::LT_Equal ?
+    _task->limit(i)->limitType() == LimitType::LT_Equal ?
       _zeroStr.push_back(true) : _zeroStr.push_back(false);
 
-    for(int j = 0; j < _task.equation().countX(); j++)
-      digs_.push_back(-_task.limit(i).equation().x(j));
+    for(int j = 0; j < _task->equation()->countX(); j++)
+      digs_.push_back(-*_task->limit(i)->equation()->x(j));
     _table.push_back(digs_);
   }
 }
 
-Digit& Solver::table(int i, int j) {
-  return _table[i][j];
+Digit* Solver::table(int i, int j) {
+  return &_table[i][j];
 }
 
 int Solver::sizeX() {
@@ -191,23 +195,22 @@ std::string Solver::getResult() {
     return getError();
   
   std::string ret;
-  int numBazis = _task.equation().countX();
+  int numBazis = _task->equation()->countX();
   for(int i = 1; i <= numBazis; i++) {
     int ind = -1;
-    for(int j = 0; j < _lblX.size(); j++) {
+    for(int j = 0; j < static_cast<int>(_lblX.size()); j++) {
       if(_lblX[j] == i) {
         ind = j;
         break;
       }
     }
-    char * dest = new char[10];
-    ret += "x" + std::string(itoa(i, dest, 10));
+    ret += "x" + Digit::intToString(i);
     if(ind == -1) {
       ret += " = 0\t";
       continue;
     }
     ret += " = " + _table[ind][0].toString() + ", ";
   }
-  ret += "Q = " + result().toString();
+  ret += "Q = " + result()->toString();
   return ret;
 }

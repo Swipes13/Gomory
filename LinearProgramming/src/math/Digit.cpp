@@ -25,11 +25,11 @@ double Digit::toDouble() {
 
 string Digit::toString() {
   if(_denominator != 1)
-    return _intToString(_numerator) + "/" + _intToString(_denominator);
-  return _intToString(_numerator);
+    return Digit::intToString(_numerator) + "/" + Digit::intToString(_denominator);
+  return Digit::intToString(_numerator);
 }
 
-string Digit::_intToString(int value) {
+string Digit::intToString(int value) {
   char* buf = new char[MAX_INT_COUNT];
   _itoa_s(value, buf, MAX_INT_COUNT, 10);
   string ret = string(buf);

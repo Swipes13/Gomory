@@ -13,6 +13,7 @@ namespace math {
 
   class Digit {
   public:
+    static string intToString(int value);
     Digit(int numerator, int denominator);
     Digit(int numerator);
     Digit(const Digit&);
@@ -63,7 +64,6 @@ namespace math {
     int _numerator;
     int _denominator;
 
-    string _intToString(int value);
     void _reduce();
   };
 

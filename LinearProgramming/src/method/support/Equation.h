@@ -11,21 +11,19 @@ namespace solver {
 
   class Equation {
   public:
-    Equation(int count, Digit**, Digit&);
+    Equation(int count, Digit**, Digit*);
     Equation(int count, Digit**);
-    Equation(int count, Digit*, Digit&);
-    Equation(int count, Digit*);
     Equation(const Equation&);
     Equation();
     ~Equation();
-    Digit& x(int);
-    Digit& forConst();
+    Digit* x(int);
+    Digit* forConst();
     int countX();
     void changeSigns();
 
   private:
-    vector<Digit> _equa;
-    Digit _forConst;
+    vector<Digit*> _equa;
+    Digit* _forConst;
   };
 
 }

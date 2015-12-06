@@ -36,21 +36,21 @@ bool GomoryFirstSolver::_stepOptimalWork(){
 
 bool GomoryFirstSolver::_preOptimalWork(){
   SimplexSolver tempSolver;
-  Task newTask = Task(_task);
+  Task* newTask = new Task(*_task);
 
-  Digit** digits = new Digit*[_task.equation().countX()];
-  for (int i = 0; i < _task.equation().countX(); i++)
+  Digit** digits = new Digit*[_task->equation()->countX()];
+  for(int i = 0; i < _task->equation()->countX(); i++)
     digits[i] = new Digit(1);
 
-  Equation eq = Equation(_task.equation().countX(), digits);
-  newTask.setEquation(eq);
+  Equation* eq = new Equation(_task->equation()->countX(), digits);
+  newTask->setEquation(eq);
   tempSolver.initialize(newTask);
 
   while (tempSolver.stepWork());
   if (tempSolver.state() != SS_Finish)
     return false;
 
-  auto simplexResult = tempSolver.result().getInteger();
+  auto simplexResult = tempSolver.result()->getInteger();
   vector<Digit> line;
   line.push_back(simplexResult);
   for (int i = 0; i < _sizeY - 1; i++)

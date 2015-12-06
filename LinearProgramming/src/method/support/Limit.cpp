@@ -4,19 +4,21 @@ using namespace solver;
 
 Limit::Limit() { }
 
-Limit::Limit(LimitType ltype, Equation &equa) {
+Limit::Limit(LimitType ltype, Equation *equa) {
   _limitType = ltype;
   _equation = equa;
 }
 
 Limit::Limit(const Limit& limit) {
   _limitType = limit._limitType;
-  _equation = Equation(limit._equation);
+  _equation = new Equation(*limit._equation);
 }
 
-Limit::~Limit() {}
+Limit::~Limit() {
+  delete _equation;
+}
 
-Equation& Limit::equation() {
+Equation* Limit::equation() {
   return _equation;
 }
 

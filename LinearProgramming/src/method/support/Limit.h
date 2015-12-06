@@ -13,16 +13,16 @@ namespace solver {
 
   class Limit {
   public:
-    Limit(LimitType, Equation&);
+    Limit(LimitType, Equation*);
     Limit(const Limit&);
     Limit();
     ~Limit();
-    Equation& equation();
+    Equation* equation();
     LimitType limitType();
     void setLimitType(LimitType);
 
   private:
-    Equation _equation;
+    Equation* _equation;
     LimitType _limitType;
   };
 

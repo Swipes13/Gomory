@@ -88,6 +88,7 @@
     <ClCompile Include="src\method\support\Task.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\LinearProgramming.h" />
     <ClInclude Include="src\math\Digit.h" />
     <ClInclude Include="src\method\support\Equation.h" />
     <ClInclude Include="src\method\GomoryFirstSolver.h" />

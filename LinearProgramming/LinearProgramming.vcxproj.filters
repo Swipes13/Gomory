@@ -68,5 +68,8 @@
     <ClInclude Include="src\method\Solver.h">
       <Filter>src\method</Filter>
     </ClInclude>
+    <ClInclude Include="src\LinearProgramming.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

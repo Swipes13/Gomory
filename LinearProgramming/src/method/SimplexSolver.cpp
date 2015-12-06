@@ -5,12 +5,12 @@ using std::map;
 using namespace solver;
 
 void SimplexSolver::_initialize(){
-  _sizeX = _task.countLimits() + 1;
+  _sizeX = _task->countLimits() + 1;
 
   _lblX.push_back(-1);
-  int xInd = _task.equation().countX();
+  int xInd = _task->equation()->countX();
   for(int i = 0; i < _sizeX - 1; i++) {
-    _task.limit(i).limitType() == LimitType::LT_Equal ? 
+    _task->limit(i)->limitType() == LimitType::LT_Equal ?
       _lblX.push_back(0) : _lblX.push_back(++xInd);
   }
   _addLimitsToTable();

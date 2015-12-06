@@ -22,11 +22,12 @@ namespace solver {
   class Solver {
   public:
     Solver();
-    void initialize(Task&t);
+    ~Solver();
+    void initialize(Task*);
     bool stepWork();
     SolverState state();
-    Digit& result();
-    Digit& table(int, int);
+    Digit* result();
+    Digit* table(int, int);
     int sizeX();
     int sizeY();
     int labelX(int);
@@ -48,7 +49,7 @@ namespace solver {
   protected:
     SolverState _state;
 
-    Task _task;
+    Task* _task;
     vector<vector<Digit>> _table;
     int _sizeX;
     int _sizeY;

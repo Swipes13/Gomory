@@ -1,12 +1,13 @@
 #include <iostream>
 #include <conio.h>
-#include "method\GomoryFirstSolver.h"
+#include "LinearProgramming.h"
 
 using namespace solver;
 using math::Digit;
 using std::cout;
 
-void main() {/*
+void main() {
+  /*
   Equation eq1 = Equation(2, new Digit*[2] { new Digit(1), new Digit(-1) }, Digit(-1));
   Equation eq2 = Equation(2, new Digit*[2] { new Digit(-2, 3), new Digit(-1) }, Digit(7, 2));
   //Equation eq2 = Equation(2, new Digit*[2] { new Digit(-4), new Digit(-6) }, Digit(21));
@@ -17,20 +18,19 @@ void main() {/*
       new Limit(LimitType::LT_More, eq2)},
       mainEq);
       */
-  Equation mainEq = Equation(2, new Digit*[2] { new Digit(1, 15), new Digit(1, 5) });
+  Equation* mainEq = new Equation(2, new Digit*[2] { new Digit(1, 15), new Digit(1, 5) }, new Digit());
   //Equation mainEq = Equation(2, new Digit*[2] { new Digit(7, 2), new Digit(25, 2) });
-  Limit* lt1 = new Limit(LT_Less, Equation(2, new Digit*[2] { new Digit(7, 2), new Digit(0) }, Digit(-22000000)));
-  Limit* lt2 = new Limit(LT_Less, Equation(2, new Digit*[2] { new Digit(0), new Digit(25, 2) }, Digit(-27000000)));
-  Limit* lt3 = new Limit(LT_Less, Equation(2, new Digit*[2] { new Digit(1, 150000), new Digit(5, 100000) }, Digit(-360)));
-  Limit* lt4 = new Limit(LT_Less, Equation(2, new Digit*[2] { new Digit(1, 18750), new Digit(1, 36364) }, Digit(-2500)));
-  Limit* lt5 = new Limit(LT_Less, Equation(2, new Digit*[2] { new Digit(1, 2), new Digit(2) }, Digit(-15000000)));
-  Limit* lt6 = new Limit(LT_Less, Equation(2, new Digit*[2] { new Digit(1, 5), new Digit(1, 2) }, Digit(-5000000)));
-  Limit* lt7 = new Limit(LT_Less, Equation(2, new Digit*[2] { new Digit(1, 40), new Digit(1, 10) }, Digit(-900000)));
+  Limit* lt1 = new Limit(LT_Less, new Equation(2, new Digit*[2] { new Digit(7, 2), new Digit(0) }, new Digit(-22000000)));
+  Limit* lt2 = new Limit(LT_Less, new Equation(2, new Digit*[2] { new Digit(0), new Digit(25, 2) }, new Digit(-27000000)));
+  Limit* lt3 = new Limit(LT_Less, new Equation(2, new Digit*[2] { new Digit(1, 150000), new Digit(5, 100000) }, new Digit(-360)));
+  Limit* lt4 = new Limit(LT_Less, new Equation(2, new Digit*[2] { new Digit(1, 18750), new Digit(1, 36364) }, new Digit(-2500)));
+  Limit* lt5 = new Limit(LT_Less, new Equation(2, new Digit*[2] { new Digit(1, 2), new Digit(2) }, new Digit(-15000000)));
+  Limit* lt6 = new Limit(LT_Less, new Equation(2, new Digit*[2] { new Digit(1, 5), new Digit(1, 2) }, new Digit(-5000000)));
+  Limit* lt7 = new Limit(LT_Less, new Equation(2, new Digit*[2] { new Digit(1, 40), new Digit(1, 10) }, new Digit(-900000)));
 
-  Task task = Task(TaskType::TT_Max, 7, new Limit*[7] {
+  Task* task = new Task(TaskType::TT_Max, 7, new Limit*[7] {
     lt1, lt2, lt3, lt4, lt5, lt6, lt7},
       mainEq);
-
 
   //GomoryFirstSolverSimplex ss;
   SimplexSolver ss;
@@ -58,7 +58,7 @@ void main() {/*
       }
 
       for(int j = 0; j < ss.sizeY(); j++) {
-        std::cout << ss.table(i, j).toString() << "\t";
+        std::cout << ss.table(i, j)->toString() << "\t";
       }
       std::cout << std::endl;
     }
@@ -67,7 +67,30 @@ void main() {/*
   while(ss.stepWork());
   if(ss.state() != solver::SS_Finish) std::cout << ss.getError();
   else std::cout << ss.getResult();
-  
+
   getchar();
 
 }
+
+#pragma warning(push)
+#pragma warning(disable:4273)
+
+void release(Solver* solver) {
+  delete solver;
+}
+
+Solver* getSimplex() {
+  return new SimplexSolver();
+}
+
+Solver* getGomoryFirstSimplex() {
+  return new GomoryFirstSolverSimplex();
+}
+
+Task* getTask(int type, int countLimits, Limit** limits, Equation* equation) {
+  TaskType tt = TaskType::TT_Max;
+  if(type == 1) tt = TaskType::TT_Min;
+
+  return new Task(tt, countLimits, limits, equation);
+}
+#pragma warning(pop)

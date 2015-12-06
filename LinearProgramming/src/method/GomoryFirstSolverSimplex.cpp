@@ -6,7 +6,7 @@ using std::map;
 
 void GomoryFirstSolverSimplex::_initialize() {
   _r = 0;
-  _sizeX = _sizeY + _task.countLimits();
+  _sizeX = _sizeY + _task->countLimits();
   for(int i = 0; i < _sizeX; i++) _lblX.push_back(i);
 
   _addGomoryLimitsToTable();
@@ -122,10 +122,10 @@ void GomoryFirstSolverSimplex::_afterMJEWork(int r, int l) {
 }
 
 void GomoryFirstSolverSimplex::_addGomoryLimitsToTable() {
-  for(int i = 0; i < _task.equation().countX(); i++) {
+  for(int i = 0; i < _task->equation()->countX(); i++) {
     vector<Digit> digs;
     digs.push_back(Digit(0));
-    for(int j = 0; j < _task.equation().countX(); j++) {
+    for(int j = 0; j < _task->equation()->countX(); j++) {
       if(j == i) digs.push_back(Digit(-1));
       else digs.push_back(Digit(0));
     }
