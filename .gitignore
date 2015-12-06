@@ -9,6 +9,8 @@
 # Build results
 
 dllExport/
+dll/LinearProgramming.exp
+dll/LinearProgramming.lib
 [Dd]ebug/
 [Rr]elease/
 x64/
