@@ -6,6 +6,9 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LinearProgramming", "LinearProgramming\LinearProgramming.vcxproj", "{78E63B39-4860-4DA1-9B33-12C6A7EB93EB}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinearProgrammingGUI", "LinearProgrammingGUI\LinearProgrammingGUI.csproj", "{A566C8C4-6562-486A-8FC4-476DF490ABB9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{78E63B39-4860-4DA1-9B33-12C6A7EB93EB} = {78E63B39-4860-4DA1-9B33-12C6A7EB93EB}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

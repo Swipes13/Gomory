@@ -126,6 +126,10 @@ Digit* result(Solver *solver) {
   return solver->result();
 }
 
+bool stepWork(Solver *solver) {
+  return solver->stepWork();
+}
+
 #pragma warning(pop)
 
 // end

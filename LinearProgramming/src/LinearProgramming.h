@@ -21,5 +21,6 @@ DLL_SPEC Equation* equation(int xCount, Digit**, Digit*);
 DLL_SPEC Limit* limit(int type, Equation*);
 DLL_SPEC int state(Solver*);
 DLL_SPEC Digit* result(Solver*);
+DLL_SPEC bool stepWork(Solver*);
 
 #endif // __LINEAR_PROGRAMMING_H 
