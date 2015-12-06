@@ -107,7 +107,7 @@ Limit* limit(int type, Equation *equa) {
   default:
     break;
   }
-  Limit* lim = new Limit(lt, equa);
+  return  new Limit(lt, equa);
 }
 
 Equation* equation(int xCount, Digit **digs, Digit *dig) {
