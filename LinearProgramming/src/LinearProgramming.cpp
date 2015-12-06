@@ -7,19 +7,20 @@ using math::Digit;
 using std::cout;
 
 void main() {
-  /*
-  Equation eq1 = Equation(2, new Digit*[2] { new Digit(1), new Digit(-1) }, Digit(-1));
-  Equation eq2 = Equation(2, new Digit*[2] { new Digit(-2, 3), new Digit(-1) }, Digit(7, 2));
-  //Equation eq2 = Equation(2, new Digit*[2] { new Digit(-4), new Digit(-6) }, Digit(21));
-  Equation mainEq = Equation(2, new Digit*[2] { new Digit(1), new Digit(10) });
+  
+  Equation* eq1 = new Equation(2, new Digit*[2] { new Digit(1), new Digit(-1) }, new Digit(-1));
+  //Equation* eq2 = new  Equation(2, new Digit*[2] { new Digit(-2, 3), new Digit(-1) }, new Digit(7, 2));
+  Equation* eq2 = new Equation(2, new Digit*[2] { new Digit(-4), new Digit(-6) }, new Digit(21));
+  Equation* mainEq = new Equation(2, new Digit*[2] { new Digit(1), new Digit(10) });
 
-  Task task = Task(TaskType::TT_Max, 2, new Limit*[2] { 
-    new Limit(LimitType::LT_More, eq1),
+  Task* task = new Task(TaskType::TT_Max, 2, new Limit*[2] {
+    new Limit(LimitType::LT_Less, eq1),
       new Limit(LimitType::LT_More, eq2)},
       mainEq);
-      */
-  Equation* mainEq = new Equation(2, new Digit*[2] { new Digit(1, 15), new Digit(1, 5) }, new Digit());
-  //Equation mainEq = Equation(2, new Digit*[2] { new Digit(7, 2), new Digit(25, 2) });
+      
+  /*
+  //Equation* mainEq = new Equation(2, new Digit*[2] { new Digit(1, 15), new Digit(1, 5) }, new Digit());
+  Equation* mainEq = new Equation(2, new Digit*[2] { new Digit(7, 2), new Digit(25, 2) });
   Limit* lt1 = new Limit(LT_Less, new Equation(2, new Digit*[2] { new Digit(7, 2), new Digit(0) }, new Digit(-22000000)));
   Limit* lt2 = new Limit(LT_Less, new Equation(2, new Digit*[2] { new Digit(0), new Digit(25, 2) }, new Digit(-27000000)));
   Limit* lt3 = new Limit(LT_Less, new Equation(2, new Digit*[2] { new Digit(1, 150000), new Digit(5, 100000) }, new Digit(-360)));
@@ -31,7 +32,7 @@ void main() {
   Task* task = new Task(TaskType::TT_Max, 7, new Limit*[7] {
     lt1, lt2, lt3, lt4, lt5, lt6, lt7},
       mainEq);
-
+    */
   //GomoryFirstSolverSimplex ss;
   SimplexSolver ss;
   ss.initialize(task);
