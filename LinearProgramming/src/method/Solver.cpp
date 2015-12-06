@@ -9,10 +9,12 @@ using std::cout;
 Solver::Solver(){
   _errorMessage = "All OK";
   _state = SS_NotInit;
+  _task = 0;
 }
 
 Solver::~Solver() {
-  delete _task;
+  if(_task != 0)
+    delete _task;
 }
 
 void Solver::initialize(Task* task) {
