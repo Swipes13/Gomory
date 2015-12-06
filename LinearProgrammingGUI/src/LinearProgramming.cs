@@ -30,6 +30,23 @@ namespace LinearProgrammingGUI.src {
     public extern static IntPtr result(IntPtr solver);
     [DllImport(_path, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl, EntryPoint = "stepWork")]
     public extern static bool StepWork(IntPtr solver);
+    [DllImport(_path, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl, EntryPoint = "numerator")]
+    public extern static int Numerator(IntPtr digit);
+    [DllImport(_path, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl, EntryPoint = "denominator")]
+    public extern static int Denomerator(IntPtr digit);
+    [DllImport(_path, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl, EntryPoint = "value")]
+    public extern static double GetDouble(IntPtr digit);
+
+    [DllImport(_path, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl, EntryPoint = "table")]
+    public extern static IntPtr Table(IntPtr solver, int i, int j);
+    [DllImport(_path, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl, EntryPoint = "sizeX")]
+    public extern static int SizeX(IntPtr solver);
+    [DllImport(_path, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl, EntryPoint = "sizeY")]
+    public extern static int SizeY(IntPtr solver);
+    [DllImport(_path, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl, EntryPoint = "labelX")]
+    public extern static int LabelX(IntPtr solver, int index);
+    [DllImport(_path, CharSet = CharSet.Unicode, CallingConvention = CallingConvention.Cdecl, EntryPoint = "labelY")]
+    public extern static int LabelY(IntPtr solver, int index);
   }
   public class Digit {
     IntPtr digit;
@@ -38,6 +55,9 @@ namespace LinearProgrammingGUI.src {
     public Digit(int num) { digit = LP_DLL.Digit(num, 1); }
     public Digit() { digit = LP_DLL.Digit(0, 1); }
     public IntPtr IntPtr() { return digit; }
+    public int Numerator() { return LP_DLL.Numerator(digit); }
+    public int Denomerator() { return LP_DLL.Denomerator(digit); }
+    public double GetDouble() { return LP_DLL.GetDouble(digit); }
   }
   public class Equation {
     IntPtr equation;
@@ -77,11 +97,11 @@ namespace LinearProgrammingGUI.src {
     public IntPtr IntPtr() { return limit; }
   }
   public class Task {
-    public enum TaskType { Min, Max }
+    public enum TaskType { Max, Min }
     IntPtr task;
     public Task(TaskType taskType, Limit[] limits, Equation equation) {
       int tt = 0; 
-      if(taskType == TaskType.Max) tt = 1;
+      if(taskType == TaskType.Min) tt = 1;
 
       IntPtr[] ptrs = new IntPtr[limits.Count()];
       for (int i = 0; i < limits.Count(); i++) ptrs[i] = limits[i].IntPtr();
@@ -129,6 +149,26 @@ namespace LinearProgrammingGUI.src {
         case 9: return SolverState.Finish;
         default: return SolverState.NotInit;
       }
+    }
+    public int SizeX() {
+      if (!initialized) return 0;
+      return LP_DLL.SizeX(solver);
+    }
+    public int SizeY() {
+      if (!initialized) return 0;
+      return LP_DLL.SizeY(solver);
+    }
+    public int LabelX(int index) {
+      if (!initialized) return -42;
+      return LP_DLL.LabelX(solver, index);
+    }
+    public int LabelY(int index) {
+      if (!initialized) return -42;
+      return LP_DLL.LabelY(solver, index);
+    }
+    public Digit Table(int i, int j) {
+      if (!initialized) return null;
+      return new Digit(LP_DLL.Table(solver,i,j));
     }
 
     protected Solver() { }

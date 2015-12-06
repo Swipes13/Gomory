@@ -22,5 +22,13 @@ DLL_SPEC Limit* limit(int type, Equation*);
 DLL_SPEC int state(Solver*);
 DLL_SPEC Digit* result(Solver*);
 DLL_SPEC bool stepWork(Solver*);
+DLL_SPEC int numerator(Digit*);
+DLL_SPEC int denominator(Digit*);
+DLL_SPEC double value(Digit*);
+DLL_SPEC Digit* table(Solver*, int i, int j);
+DLL_SPEC int sizeX(Solver*);
+DLL_SPEC int sizeY(Solver*);
+DLL_SPEC int labelX(Solver*,int);
+DLL_SPEC int labelY(Solver*, int);
 
 #endif // __LINEAR_PROGRAMMING_H 

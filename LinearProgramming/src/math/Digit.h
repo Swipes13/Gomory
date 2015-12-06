@@ -26,6 +26,8 @@ namespace math {
     Digit& left();
     Digit& absD();
     DigitType digitType();
+    int numerator();
+    int denominator();
 
     Digit& operator/(const Digit&);
     Digit& operator/(const int&);

@@ -307,3 +307,11 @@ Digit& Digit::absD(){
 Digit& Digit::getInteger(){
   return *(new Digit(_numerator/_denominator));
 }
+
+int Digit::numerator() {
+  return _numerator;
+}
+
+int Digit::denominator() {
+  return _denominator;
+}

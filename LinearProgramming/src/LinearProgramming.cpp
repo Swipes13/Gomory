@@ -130,6 +130,38 @@ bool stepWork(Solver *solver) {
   return solver->stepWork();
 }
 
+int numerator(Digit *digit) {
+  return digit->numerator();
+}
+
+int denominator(Digit *digit) {
+  return digit->denominator();
+}
+
+double value(Digit *digit) {
+  return digit->toDouble();
+}
+
+Digit* table(Solver *solver, int i, int j) {
+  return solver->table(i, j);
+}
+
+int sizeX(Solver *solver) {
+  return solver->sizeX();
+}
+
+int sizeY(Solver *solver) {
+  return solver->sizeY();
+}
+
+int labelX(Solver *solver, int index) {
+  return solver->labelX(index);
+}
+
+int labelY(Solver *solver, int index) {
+  return solver->labelY(index);
+}
+
 #pragma warning(pop)
 
 // end
